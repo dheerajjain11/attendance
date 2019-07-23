@@ -5,7 +5,7 @@ using Domain;
 
 namespace Services
 {
-    public class AttendanceService
+    public class AttendanceService : IAttendanceService
     {
         private AttendanceContext context;
         public AttendanceService(AttendanceContext context)
@@ -13,7 +13,7 @@ namespace Services
             this.context = context;
             context.ChangeTracker.LazyLoadingEnabled = false;
         }
-        public void MarkAttendance(MarkAttendanceDTO attendanceDTO)
+        public void MarkAttendance(Guid machineId, MarkAttendanceDTO attendanceDTO)
         {
             /*
              * 1. Get the domain
@@ -21,7 +21,7 @@ namespace Services
              * 3. Persist the changes
              */
             AttendanceMachine attendanceMachine = 
-                context.AttendanceMachines.Find(attendanceDTO.AttendanceMachineId);
+                context.AttendanceMachines.Find(machineId);
 
             if(attendanceMachine!=null)
             {
