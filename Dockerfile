@@ -1,11 +1,11 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim AS base
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
 WORKDIR /src
-COPY ../. .
+COPY . .
 WORKDIR "/src/Attendance"
 RUN dotnet build "Attendance.csproj" -c Release -o /app
 
@@ -13,6 +13,10 @@ FROM build AS publish
 RUN dotnet publish "Attendance.csproj" -c Release -o /app
 
 FROM base AS final
+COPY --from=publish /app /app
+COPY --from=publish /src /app
+COPY entrypoint.sh /app
 WORKDIR /app
-COPY --from=publish /app .
+RUN chmod +x ./entrypoint.sh
+CMD /bin/bash ./entrypoint.sh
 ENTRYPOINT ["dotnet", "Attendance.dll"]

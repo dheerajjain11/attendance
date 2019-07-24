@@ -14,7 +14,7 @@ namespace Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"data source =.\sqlexpress; initial catalog = MyMicroservices; integrated security = True; MultipleActiveResultSets = True");
+            optionsBuilder.UseSqlServer(@"Server = db; Database = master; User = sa; Password = Idk2wmpi");
             base.OnConfiguring(optionsBuilder);
         }
     }

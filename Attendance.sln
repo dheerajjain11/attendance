@@ -9,11 +9,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{5325FD00-93AE-4589-8D80-CCD6D5B5593B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "AttendanceService\Services.csproj", "{4987885D-57B4-4168-A25C-0942A16C5E7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "AttendanceService\Services.csproj", "{4987885D-57B4-4168-A25C-0942A16C5E7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{CDFF0AF3-85EB-44C7-9090-BA5ADA1D45B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{CDFF0AF3-85EB-44C7-9090-BA5ADA1D45B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{CC936682-AB7E-4C55-93B1-F653239F91FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{CC936682-AB7E-4C55-93B1-F653239F91FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DockerFile", "DockerFile", "{AF19E1D5-54B5-4C29-821E-C0120A788003}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
