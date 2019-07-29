@@ -14,7 +14,7 @@ namespace Persistence
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server = db; Database = master; User = sa; Password = Idk2wmpi");
+            optionsBuilder.UseSqlServer(@"Server = localhost; Database = master; User = sa; Password = Idk2wmpi");
             base.OnConfiguring(optionsBuilder);
         }
     }

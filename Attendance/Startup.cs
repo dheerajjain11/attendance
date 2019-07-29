@@ -35,6 +35,11 @@ namespace Attendance
             services.AddScoped<IAttendanceService, AttendanceService>();
             services.AddSwaggerGen(s=>s.SwaggerDoc("v1", new Info {Title = "Attendance MicroAPI",
                                                                     Version = "v1"}));
+
+            using (var context = new AttendanceContext())
+            {
+                context.Database.Migrate();
+            }
             //services.AddDbContext<AttendanceContext>(builder => 
             //    builder.UseSqlServer(@"data source =.\sqlexpress; initial catalog = MyMicroservices; integrated security = True; MultipleActiveResultSets = True"));
         }
