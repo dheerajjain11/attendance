@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AttendanceRepository.cs" />
+    <Compile Remove="Migrations\20190731105754_fixes.cs" />
+    <Compile Remove="Migrations\20190731105754_fixes.Designer.cs" />
+    <Compile Remove="Migrations\20190731110611_fixes2.cs" />
+    <Compile Remove="Migrations\20190731110611_fixes2.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="microsoft.entityframeworkcore" Version="2.2.6" />
     <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="2.2.6" />
   </ItemGroup>

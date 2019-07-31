@@ -9,12 +9,21 @@ namespace Persistence
 {
     public class AttendanceContext : DbContext
     {
-        public DbSet<AttendanceItem> AttendanceItems { get; set; }
-        public DbSet<AttendanceMachine> AttendanceMachines { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
+        public DbSet<AttendanceEvent> AttendanceEvents { get; set; }
+
+        public AttendanceContext()
+        {
+        }
+
+        public AttendanceContext(DbContextOptions<AttendanceContext> dbContextOptions):base(dbContextOptions)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server = localhost; Database = master; User = sa; Password = Idk2wmpi");
+            optionsBuilder.UseSqlServer(@"data source =.\sqlexpress; initial catalog = MyMicroservices3; integrated security = True; MultipleActiveResultSets = True");
+            //optionsBuilder.UseSqlServer(@"Server = localhost; Database = master; User = sa; Password = Idk2wmpi");
             base.OnConfiguring(optionsBuilder);
         }
     }

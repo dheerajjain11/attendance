@@ -20,22 +20,24 @@ namespace Services
              * 2. Let domain handle calls
              * 3. Persist the changes
              */
-            AttendanceMachine attendanceMachine = 
-                context.AttendanceMachines.Find(machineId);
+            AttendanceEvent attendanceMachine = 
+                context.AttendanceEvents.Find(machineId);
 
             if(attendanceMachine!=null)
             {
-                attendanceMachine.Mark(attendanceDTO.PersonId, attendanceDTO.AttendanceEntry, attendanceDTO.Date);
+                Attendance attendance = new Attendance(attendanceMachine);
+                attendance.Mark(attendanceDTO.PersonId, attendanceDTO.AttendanceEntry, DateTime.Now);
+                context.Attendances.Add(attendance);
+                context.SaveChanges();
             }
-            context.SaveChanges();
         }
 
         public Guid CreateAttendanceMachine(AttendanceMachineCreationDTO attendanceMachineCreationDTO)
         {
-            AttendanceMachine attendanceMachine = new AttendanceMachine(
+            AttendanceEvent attendanceMachine = new AttendanceEvent(
                                                         attendanceMachineCreationDTO.AttendanceEvent,
                                                         true);
-            context.AttendanceMachines.Add(attendanceMachine);
+            context.AttendanceEvents.Add(attendanceMachine);
             context.SaveChanges();
             return attendanceMachine.Id;
         }

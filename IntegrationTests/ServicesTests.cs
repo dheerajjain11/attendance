@@ -27,9 +27,10 @@ namespace IntegrationTests
             MarkAttendanceDTO attendanceDTO = new MarkAttendanceDTO();
             Guid attendanceMachineId = Guid.Parse("F34F51AC-8805-4D5D-6C31-08D70E77F36E");
             attendanceDTO.AttendanceEntry = AttendanceEntryType.Present;
-            attendanceDTO.PersonId = 123;
+            attendanceDTO.PersonId = 123.ToString();
             attendanceDTO.Date = DateTime.Now;
             service.MarkAttendance(attendanceMachineId, attendanceDTO);
         }
     }
 }
+    

@@ -33,8 +33,8 @@ namespace Attendance.Controllers
         //}
 
         // POST api/values
-        [HttpPost("createmachine")]
-        public IActionResult CreateAttendanceMachine([FromBody] AttendanceMachineCreationDTO attendanceMachineCreationDTO)
+        [HttpPost("createattendanceevent")]
+        public IActionResult CreateAttendanceEvent([FromBody] AttendanceMachineCreationDTO attendanceMachineCreationDTO)
         {
             Guid guid = attendanceService.CreateAttendanceMachine(attendanceMachineCreationDTO);
             if (guid == Guid.Empty && guid == null)
@@ -44,10 +44,10 @@ namespace Attendance.Controllers
             return Ok(guid.ToString());
         }
 
-        [HttpPut("machine/{id}/mark")]
-        public IActionResult MarkAttendance(string id, [FromBody] MarkAttendanceDTO markAttendanceDTO)
+        [HttpPut("attendance/{eventid}/mark")]
+        public IActionResult MarkAttendance(string eventid, [FromBody] MarkAttendanceDTO markAttendanceDTO)
         {
-            Guid machineId = Guid.Parse(id);
+            Guid machineId = Guid.Parse(eventid);
             if(machineId==null || machineId==Guid.Empty)
             {
                 return BadRequest("Invalid Parameter");

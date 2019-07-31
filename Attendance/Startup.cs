@@ -31,7 +31,7 @@ namespace Attendance
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddDbContext<AttendanceContext>();
+            services.AddDbContext<AttendanceContext>(o=>o.UseSqlServer(@"data source =.\sqlexpress; initial catalog = MyMicroservices3; integrated security = True; MultipleActiveResultSets = True",a=>a.MigrationsAssembly("Persistence")));
             services.AddScoped<IAttendanceService, AttendanceService>();
             services.AddSwaggerGen(s=>s.SwaggerDoc("v1", new Info {Title = "Attendance MicroAPI",
                                                                     Version = "v1"}));
