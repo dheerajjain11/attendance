@@ -6,10 +6,10 @@ namespace Domain
 {
     public class Attendance : EntityBase
     {
-        public string PersonID { get; private set; }
-        public AttendanceEntryType AttendanceEntry { get; private set; }
-        public DateTime AttendanceDate { get; private set; }
-        public virtual AttendanceEvent Event {get; private set;}
+        public string PersonID { get; protected set; }
+        public AttendanceEntryType AttendanceEntry { get; protected set; }
+        public DateTime AttendanceDate { get; protected set; }
+        public virtual AttendanceEvent Event {get; protected set;}
         protected Attendance()
         {
         }

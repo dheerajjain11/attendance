@@ -10,9 +10,9 @@ namespace Domain
     public class AttendanceEvent : EntityBase
     {
         private ICollection<Attendance> _attendanceItems = null;
-        public virtual string EventName { get; private set; }
-        public virtual TimeSpan Duration { get; private set; }
-        public virtual bool AllowMultiple { get; private set; }
+        public virtual string EventName { get; protected set; }
+        public virtual TimeSpan Duration { get; protected set; }
+        public virtual bool AllowMultiple { get; protected set; }
 
         //public virtual ICollection<Attendance> Attendances
         //{
@@ -24,7 +24,7 @@ namespace Domain
         //        }
         //        return _attendanceItems;
         //    }
-        //    private set { _attendanceItems = value; }
+        //    protected set { _attendanceItems = value; }
         //}
 
         public AttendanceEvent()
