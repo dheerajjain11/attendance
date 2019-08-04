@@ -22,14 +22,8 @@ namespace Services
              */
             AttendanceEvent attendanceMachine = 
                 context.AttendanceEvents.Find(machineId);
-
-            if(attendanceMachine!=null)
-            {
-                Attendance attendance = new Attendance(attendanceMachine);
-                attendance.Mark(attendanceDTO.PersonId, attendanceDTO.AttendanceEntry, DateTime.Now);
-                context.Attendances.Add(attendance);
-                context.SaveChanges();
-            }
+            attendanceMachine.Mark(attendanceDTO.PersonId, attendanceDTO.AttendanceEntry, attendanceDTO.Date);
+            context.SaveChanges();
         }
 
         public Guid CreateAttendanceMachine(AttendanceMachineCreationDTO attendanceMachineCreationDTO)

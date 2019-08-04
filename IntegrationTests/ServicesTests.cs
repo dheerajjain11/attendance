@@ -15,7 +15,7 @@ namespace IntegrationTests
             AttendanceService service = new AttendanceService(new AttendanceContext());
             service.CreateAttendanceMachine(new AttendanceMachineCreationDTO
             {
-                AttendanceEvent = "Office Daily Attendance",
+                AttendanceEvent = "Hello attendance",
                 IsMultiple = true
             });
         }
@@ -25,7 +25,7 @@ namespace IntegrationTests
         {
             AttendanceService service = new AttendanceService(new AttendanceContext());
             MarkAttendanceDTO attendanceDTO = new MarkAttendanceDTO();
-            Guid attendanceMachineId = Guid.Parse("F34F51AC-8805-4D5D-6C31-08D70E77F36E");
+            Guid attendanceMachineId = Guid.Parse("3D15C1B9-9337-4341-223A-08D718A2C2AE");
             attendanceDTO.AttendanceEntry = AttendanceEntryType.Present;
             attendanceDTO.PersonId = 123.ToString();
             attendanceDTO.Date = DateTime.Now;

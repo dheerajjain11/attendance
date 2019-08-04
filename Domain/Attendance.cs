@@ -6,22 +6,24 @@ namespace Domain
 {
     public class Attendance : EntityBase
     {
-        public string PersonID { get; protected set; }
-        public AttendanceEntryType AttendanceEntry { get; protected set; }
-        public DateTime AttendanceDate { get; protected set; }
-        public virtual AttendanceEvent Event {get; protected set;}
+        public string PersonID { get; internal set; }
+        public AttendanceEntryType AttendanceEntry { get; internal set; }
+        public DateTime AttendanceDate { get; internal set; }
+        public virtual AttendanceEvent Event {get; internal set;}
         protected Attendance()
         {
         }
-        public Attendance(AttendanceEvent attendanceEvent)
+        internal Attendance(AttendanceEvent attendanceEvent, string personId)
         {
             this.Event = attendanceEvent;
-        }
-        public bool Mark(string personId, AttendanceEntryType entryType, DateTime dateTime)
-        {
             this.PersonID = personId;
-            this.AttendanceEntry = entryType;
-            this.AttendanceDate = dateTime;
+        }
+
+        //default setter
+        internal bool Mark()
+        {
+            this.AttendanceEntry = AttendanceEntryType.Present;
+            this.AttendanceDate = DateTime.Now.Date;
             return true;
         }
     }

@@ -33,7 +33,7 @@ namespace Attendance.Controllers
         //}
 
         // POST api/values
-        [HttpPost("createattendanceevent")]
+        [HttpPost("createevent")]
         public IActionResult CreateAttendanceEvent([FromBody] AttendanceMachineCreationDTO attendanceMachineCreationDTO)
         {
             Guid guid = attendanceService.CreateAttendanceMachine(attendanceMachineCreationDTO);
@@ -43,6 +43,12 @@ namespace Attendance.Controllers
             }
             return Ok(guid.ToString());
         }
+
+        //public IActionResult Mark(MarkAttendanceRealDTO realDTO)
+        //{
+        //    attendanceService.MarkAttendance(realDTO);
+        //    return Ok();
+        //}
 
         [HttpPut("attendance/{eventid}/mark")]
         public IActionResult MarkAttendance(string eventid, [FromBody] MarkAttendanceDTO markAttendanceDTO)

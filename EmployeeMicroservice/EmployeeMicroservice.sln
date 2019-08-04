@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeMicroservice", "EmployeeMicroservice.csproj", "{1DBC49A8-F0BF-49C8-B007-C38E8B4AE81E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeMicroservice", "EmployeeMicroservice.csproj", "{1DBC49A8-F0BF-49C8-B007-C38E8B4AE81E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{965861D0-08EF-4A82-9E69-BB4A3394E8A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{965861D0-08EF-4A82-9E69-BB4A3394E8A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{9B1ED61F-E1C7-430E-BD03-C9B86F32E388}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{DCF356F1-46B9-4888-A05B-3533E2A26EEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "..\Services\Services.csproj", "{396C8851-2C52-49C0-A64D-8619882EB4D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{965861D0-08EF-4A82-9E69-BB4A3394E8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{965861D0-08EF-4A82-9E69-BB4A3394E8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{965861D0-08EF-4A82-9E69-BB4A3394E8A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B1ED61F-E1C7-430E-BD03-C9B86F32E388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B1ED61F-E1C7-430E-BD03-C9B86F32E388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B1ED61F-E1C7-430E-BD03-C9B86F32E388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B1ED61F-E1C7-430E-BD03-C9B86F32E388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCF356F1-46B9-4888-A05B-3533E2A26EEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF356F1-46B9-4888-A05B-3533E2A26EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCF356F1-46B9-4888-A05B-3533E2A26EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCF356F1-46B9-4888-A05B-3533E2A26EEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{396C8851-2C52-49C0-A64D-8619882EB4D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{396C8851-2C52-49C0-A64D-8619882EB4D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{396C8851-2C52-49C0-A64D-8619882EB4D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{396C8851-2C52-49C0-A64D-8619882EB4D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

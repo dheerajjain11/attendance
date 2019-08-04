@@ -8,7 +8,7 @@ namespace Domain.Base
     public abstract class EntityBase
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public Guid Id { get; protected set; }
         public override bool Equals(object obj)
         {
             var other = obj as EntityBase;
