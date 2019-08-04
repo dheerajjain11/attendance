@@ -11,7 +11,7 @@ namespace Domain
         public virtual TimeSpan Duration { get; protected set; }
         public virtual bool AllowMultiple { get; protected set; }
         public ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
-        public AttendanceEvent()
+        protected AttendanceEvent()
         {
         }
 

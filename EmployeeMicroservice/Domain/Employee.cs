@@ -1,7 +1,4 @@
 ﻿using Domain.Base;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Domain
 {
@@ -17,6 +14,24 @@ namespace Domain
         public Employee(string name)
         {
             this.Name = name;
+        }
+        
+        public void SetDesignation(string designation)
+        {
+            this.Designation = designation;
+            //raise event designation changed
+        }
+
+        public void SetSeatNumber(string seatNumber)
+        {
+            this.SeatNumber = seatNumber;
+            //raise event seatchanged
+        }
+
+        public void SetBuilding(string building)
+        {
+            this.BuildingName = building;
+            //raise event Building changed
         }
     }
 }
