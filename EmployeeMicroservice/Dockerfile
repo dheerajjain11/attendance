@@ -4,16 +4,16 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
 WORKDIR /src
-COPY ["EmployeeMicroservice.csproj", ""]
-RUN dotnet restore "EmployeeMicroservice.csproj"
+COPY ["employeemicroservice.csproj", ""]
+RUN dotnet restore "employeemicroservice.csproj"
 COPY . .
 WORKDIR "/src/"
-RUN dotnet build "EmployeeMicroservice.csproj" -c Release -o /app
+RUN dotnet build "employeemicroservice.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "EmployeeMicroservice.csproj" -c Release -o /app
+RUN dotnet publish "employeemicroservice.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "EmployeeMicroservice.dll"]
+ENTRYPOINT ["dotnet", "employeemicroservice.dll"]

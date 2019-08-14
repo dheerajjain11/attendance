@@ -7,5 +7,6 @@ namespace Services
     {
         void MarkAttendance(Guid machineId, MarkAttendanceDTO attendanceDTO);
         Guid CreateAttendanceMachine(AttendanceMachineCreationDTO attendanceMachineCreationDTO);
+        AttendanceEventDTO GetAttendanceEvent(string name);
     }
 }

@@ -2,6 +2,7 @@
 using Persistence;
 using System;
 using Domain;
+using System.Linq;
 
 namespace Services
 {
@@ -34,6 +35,17 @@ namespace Services
             context.AttendanceEvents.Add(attendanceMachine);
             context.SaveChanges();
             return attendanceMachine.Id;
+        }
+
+        public AttendanceEventDTO GetAttendanceEvent(string name)
+        {
+            return (from e in context.Set<AttendanceEvent>() where e.EventName.Equals(name)
+            select new AttendanceEventDTO
+            {
+                EventId = e.Id,
+                EventName = e.EventName,
+                IsMultiple = e.AllowMultiple
+            }).FirstOrDefault();
         }
     }
 }

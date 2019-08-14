@@ -6,6 +6,10 @@ using DTO;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace Attendance.Controllers
 {
@@ -33,6 +37,14 @@ namespace Attendance.Controllers
         //}
 
         // POST api/values
+
+        [Authorize(Roles = "User")]
+        [HttpGet("getevent")]
+        public IActionResult Get(string eventName)
+        {
+            return Ok(attendanceService.GetAttendanceEvent(eventName));
+        }
+      
         [HttpPost("createevent")]
         public IActionResult CreateAttendanceEvent([FromBody] AttendanceMachineCreationDTO attendanceMachineCreationDTO)
         {
