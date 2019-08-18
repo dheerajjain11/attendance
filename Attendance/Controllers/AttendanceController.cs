@@ -9,7 +9,7 @@ using Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Attendance.Controllers
 {
@@ -38,7 +38,7 @@ namespace Attendance.Controllers
 
         // POST api/values
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "User", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("getevent")]
         public IActionResult Get(string eventName)
         {

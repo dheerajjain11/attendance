@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Persistence;
 using Services;
 using Swashbuckle.AspNetCore.Swagger;
@@ -29,14 +31,48 @@ namespace EmployeeMicroservice
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            JwtSecurityTokenHandler.DefaultOutboundClaimTypeMap.Clear();
+
+            services.AddAuthentication()
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = "http://localhost:5000/";
+                    options.Audience = "resource-server";
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        NameClaimType = "sub",
+                        RoleClaimType = "role"
+                    };
+                });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<EmployeeContext>();
             services.AddScoped<IEmployeeService, EmployeeService>();
-            services.AddSwaggerGen(s => s.SwaggerDoc("v1", new Info
+            services.AddSwaggerGen(s =>
             {
-                Title = "Employee MicroAPI",
-                Version = "v1"
-            }));
+                s.SwaggerDoc("v1", new Info
+                {
+                    Title = "Employee MicroAPI",
+                    Version = "v1"
+                });
+                var security = new Dictionary<string, IEnumerable<string>>
+                {
+                    {"Bearer", Array.Empty<string>()},
+                };
+
+                s.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+                s.AddSecurityRequirement(security);
+                s.CustomSchemaIds(x => x.FullName);
+            });
 
             using (var context = new EmployeeContext())
             {
@@ -52,6 +88,7 @@ namespace EmployeeMicroservice
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseAuthentication();
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>

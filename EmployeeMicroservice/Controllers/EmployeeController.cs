@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DTO;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services; 
 
@@ -17,6 +19,7 @@ namespace EmployeeMicroservice.Controllers
         {
             this.employeeService = employeeService;
         }
+        [Authorize(Roles= "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("create")]
         public IActionResult Post(string employeeName)
         { 

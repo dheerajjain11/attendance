@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Tokens;
 using Persistence;
 using Services;
 using Swashbuckle.AspNetCore.Swagger;
@@ -35,42 +36,48 @@ namespace Attendance
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            })
-            .AddCookie(options =>
-            {
-                options.LoginPath = new PathString("/signin");
-            }
-            )
-            .AddOpenIdConnect(options=>
+            services.AddCors();
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            JwtSecurityTokenHandler.DefaultOutboundClaimTypeMap.Clear();
+
+            services.AddAuthentication()
+                .AddJwtBearer(options =>
                 {
-                    options.ClientId = "attend";
-                    options.ClientSecret = "901564E5-E7FE-42CB-B10D-61EF6A8F3654";
+                    options.Authority = "http://localhost:5000/";
+                    options.Audience = "resource-server";
                     options.RequireHttpsMetadata = false;
-                    options.GetClaimsFromUserInfoEndpoint = true;
-                    options.SaveTokens = true;
-                    options.ResponseType = OpenIdConnectResponseType.Code;
-                    options.AuthenticationMethod = OpenIdConnectRedirectBehavior.RedirectGet;
-                    options.Authority = "http://localhost:54540/";
-                    options.Scope.Add("email");
-                    options.Scope.Add("roles");
-                    options.SecurityTokenValidator = new JwtSecurityTokenHandler
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        // Disable the built-in JWT claims mapping feature.
-                        InboundClaimTypeMap = new Dictionary<string, string>()
+                        NameClaimType = "sub",
+                        RoleClaimType = "role"
                     };
-                    options.TokenValidationParameters.NameClaimType = "name";
-                    options.TokenValidationParameters.RoleClaimType = "role";
-                }
-            );
+                });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<AttendanceContext>(o=>o.UseSqlServer(@"data source =.\sqlexpress; initial catalog = MyMicroservices4; integrated security = True; MultipleActiveResultSets = True",a=>a.MigrationsAssembly("Persistence")));
             services.AddScoped<IAttendanceService, AttendanceService>();
-            services.AddSwaggerGen(s=>s.SwaggerDoc("v1", new Info {Title = "Attendance MicroAPI",
-                                                                    Version = "v1"}));
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1", new Info
+                {
+                    Title = "Attendance MicroAPI",
+                    Version = "v1"
+                });
+                var security = new Dictionary<string, IEnumerable<string>>
+                {
+                    {"Bearer", Array.Empty<string>()},
+                };
+
+                s.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+                s.AddSecurityRequirement(security);
+                s.CustomSchemaIds(x => x.FullName);
+            });
 
             using (var context = new AttendanceContext())
             {
